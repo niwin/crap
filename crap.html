@@ -39,23 +39,24 @@
                 <button class="press"> - p - </button>
             </div>
             <div class="data">
-                R number: <input class="g_counter" type="text" value="1000" style="width: 40px;"/> See results: <input type="checkbox" class="see_result"/> See console: <input type="checkbox" class="see_console"/>
+                R number: <input class="g_counter" type="text" value="100" style="width: 40px;"/> See results: <input type="checkbox" class="see_result"/> See console: <input type="checkbox" class="see_console"/>
             </div>
         </div>
         <div class="result">
             <table>
                 <tr>
-                    <td colspan="9">D Summary:</td>
+                    <td colspan="10">D Summary:</td>
                 </tr>
                 <tr>
                     <td>R Max</td>
                     <td>R AVG</td>
                     <td>G TOTAL</td>
-                    <td>Above 0</td>
-                    <td>Above 10</td>
-                    <td>Above 20</td>
-                    <td>Above 30</td>
-                    <td>Above 40</td>
+                    <td>0 - 5</td>
+                    <td>6 - 10</td>
+                    <td>11 - 20</td>
+                    <td>21 - 30</td>
+                    <td>31 - 40</td>
+                    <td>41 - 50</td>
                     <td>Above 50</td>
                 </tr>
                 <tr>
@@ -63,6 +64,7 @@
                     <td class="r_avg">&nbsp;</td>
                     <td class="g_total">&nbsp;</td>
                     <td class="above_0">&nbsp;</td>
+                    <td class="above_5">&nbsp;</td>
                     <td class="above_10">&nbsp;</td>
                     <td class="above_20">&nbsp;</td>
                     <td class="above_30">&nbsp;</td>
@@ -85,6 +87,7 @@
             DS.RLING_MAX = 0;
             DS.G_TOTAL = 0;
             DS.ABOVE_0 = 0;
+            DS.ABOVE_5 = 0;
             DS.ABOVE_10 = 0;
             DS.ABOVE_20 = 0;
             DS.ABOVE_30 = 0;
@@ -140,7 +143,9 @@
                             DS.ABOVE_20++;
                         } else if (DS.RLING_COUNTER > 10) {
                             DS.ABOVE_10++;
-                        } else if (DS.RLING_COUNTER > 0) {
+                        } else if (DS.RLING_COUNTER > 5) {
+                            DS.ABOVE_5++;
+                        } else if (DS.RLING_COUNTER >= 0) {
                             DS.ABOVE_0++;
                         }
 
@@ -235,6 +240,7 @@
                     $(".g_total").html(DS.G_TOTAL);
                     $(".r_avg").html(parseInt(DS.G_COUNTER/DS.G_TOTAL));
                     $(".above_0").html(DS.ABOVE_0 + " (" + ((DS.ABOVE_0/DS.G_TOTAL)*100).toFixed(3) +"%)");
+                    $(".above_5").html(DS.ABOVE_5 + " (" + ((DS.ABOVE_10/DS.G_TOTAL)*100).toFixed(3) +"%)");
                     $(".above_10").html(DS.ABOVE_10 + " (" + ((DS.ABOVE_10/DS.G_TOTAL)*100).toFixed(3) +"%)");
                     $(".above_20").html(DS.ABOVE_20 + " (" + ((DS.ABOVE_20/DS.G_TOTAL)*100).toFixed(3) +"%)");
                     $(".above_30").html(DS.ABOVE_30 + " (" + ((DS.ABOVE_30/DS.G_TOTAL)*100).toFixed(3) +"%)");
